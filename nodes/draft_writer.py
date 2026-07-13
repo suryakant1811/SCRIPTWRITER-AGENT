@@ -12,14 +12,17 @@ llm = ChatGoogleGenerativeAI(
 def generate_draft(state: ContentState):
     user_request = state["messages"][-1].content
     prompt = f"""
-    Write a high-quality first draft of a script based on the user's request.
-    Requirements:   
-    - Start with a strong hook.
-    - Organize the content logically.
-    - Keep the language engaging.
-    - End with a conclusion or CTA. 
+        Your task is to write the FIRST draft of a YouTube script. 
+            Requirements:
+            - Write in simple English.
+            - Keep the information accurate.
+            - Organize the script into clear paragraphs.
+            - Do not use emojis.
+            - Do not convert it to Hinglish.
+            - Do not make it overly engaging.
+            - Focus only on creating a clean first draft.
 
-    User_request: {user_request}
+            Topic: {user_request}
     """
 
     response = llm.invoke(prompt)
