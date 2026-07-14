@@ -1,8 +1,7 @@
 from state import ContentState
 from prompt.storytellar_prompt import get_storyteller_prompt
-from llm.llm import get_llm
+from llm import llm
 
-llm = get_llm()
 
 def storytellar(state: ContentState):
     edited_script = state["edited_script"]
@@ -10,5 +9,5 @@ def storytellar(state: ContentState):
 
     result = llm.invoke(prompt)
     state["formatted_script"] = result.content
-
+    print("Currently in 3 node")
     return state

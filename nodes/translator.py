@@ -1,8 +1,8 @@
 from state import ContentState
-from prompt.translator_prompt import get_translator_prompt,   get_translator_promptget_translator_prompt
-from llm.llm import get_llm
+from prompt.translator_prompt import get_translator_prompt
+from llm import llm
 
-llm = get_llm()
+
 
 def translator(state: ContentState):
     formatted_script = state["formatted_script"]
@@ -10,5 +10,5 @@ def translator(state: ContentState):
 
     response = llm.invoke(prompt)
     state["hinglish_script"] = response.content
-    
+    print("Currently in 4 node")
     return state

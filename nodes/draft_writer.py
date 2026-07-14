@@ -1,8 +1,7 @@
 from state import ContentState
 from prompt.draft_prompt import get_draft_prompt
-from llm.llm import get_llm
+from llm import llm
 
-llm = get_llm()
 
 def generate_draft(state: ContentState):
     user_request = state["messages"][-1].content
@@ -11,5 +10,5 @@ def generate_draft(state: ContentState):
     response = llm.invoke(prompt)
 
     state["raw_script"] = response.content
-
+    print("Currently in 1 node")
     return state
