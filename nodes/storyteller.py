@@ -1,14 +1,8 @@
-import os
-from dotenv import load_dotenv
-load_dotenv()
 from state import ContentState
-from langchain_google_genai import ChatGoogleGenerativeAI
 from prompt.storytellar_prompt import get_storyteller_prompt
+from llm.llm import get_llm
 
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY"),
-)
+llm = get_llm()
 
 def storytellar(state: ContentState):
     edited_script = state["edited_script"]

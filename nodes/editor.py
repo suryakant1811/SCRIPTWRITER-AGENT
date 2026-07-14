@@ -1,13 +1,8 @@
 from state import ContentState
-import os 
-from dotenv import load_dotenv
-load_dotenv()
-from langchain_google_genai import ChatGoogleGenerativeAI
 from prompt.editor_prompt import get_editor_prompt
-llm = ChatGoogleGenerativeAI(
-    model="gemini-2.5-flash",
-    google_api_key=os.getenv("GEMINI_API_KEY"),
-)
+from llm.llm import get_llm
+
+llm = get_llm()
 
 def editor(state: ContentState):
     raw_data = state['raw_script']
