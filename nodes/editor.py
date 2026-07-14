@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI
-
+from prompt.editor_prompt import get_editor_prompt
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
     google_api_key=os.getenv("GEMINI_API_KEY"),
@@ -11,16 +11,7 @@ llm = ChatGoogleGenerativeAI(
 
 def editor(state: ContentState):
     raw_data = state['raw_script']
-    prompt = f"""
-    You are a professional editor.
-    Improve the grammar, readability and sentence flow.
-    Rules:
-        - Do not change the meaning.
-        - Do not add extra information.
-        - Keep the structure.
-        - Return only the edited script.
-    Script: {raw_data}
-    """
+    prompt = get_editor_prompt(raw_data)
 
     response = llm.invoke(prompt)
 

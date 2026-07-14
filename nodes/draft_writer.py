@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 from langchain_google_genai import ChatGoogleGenerativeAI
+from prompt.draft_prompt import get_draft_prompt
 
 llm = ChatGoogleGenerativeAI(
     model="gemini-2.5-flash",
@@ -11,19 +12,7 @@ llm = ChatGoogleGenerativeAI(
 
 def generate_draft(state: ContentState):
     user_request = state["messages"][-1].content
-    prompt = f"""
-        Your task is to write the FIRST draft of a YouTube script. 
-            Requirements:
-            - Write in simple English.
-            - Keep the information accurate.
-            - Organize the script into clear paragraphs.
-            - Do not use emojis.
-            - Do not convert it to Hinglish.
-            - Do not make it overly engaging.
-            - Focus only on creating a clean first draft.
-
-            Topic: {user_request}
-    """
+    prompt = get_draft_prompt(user_request)
 
     response = llm.invoke(prompt)
 
